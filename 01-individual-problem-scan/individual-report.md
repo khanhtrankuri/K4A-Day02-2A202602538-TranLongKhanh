@@ -6,8 +6,13 @@
 
 - Họ và tên: Trần Long Khánh
 - Mã học viên: 2A202602538
-- Vai trò / bối cảnh (VD: sinh viên năm X, intern PM, ...): Sinh viên năm cuối
-- Công việc hằng tuần (3-5 gạch đầu dòng để soi problem): AI enginer Intern 
+- Vai trò / bối cảnh (VD: sinh viên năm X, intern PM, ...): Sinh viên năm cuối, đang làm AI Engineer Intern
+- Công việc hằng tuần (3-5 gạch đầu dòng để soi problem):
+  - Train / fine-tune và đánh giá model Computer Vision (detection, tracking).
+  - Convert và deploy model lên thiết bị edge (Jetson: TensorRT, GPU/DLA).
+  - Setup môi trường, chuyển qua lại giữa nhiều project / máy (PC, server, Jetson).
+  - Debug lỗi khi train, inference, convert model.
+  - Dùng AI coding assistant để build feature / prototype mới rồi review lại code.
 
 ---
 
@@ -15,26 +20,32 @@
 
 **Cách điền:** mỗi dòng = việc gì + ai chịu + đo bằng gì. Cột `Dấu hiệu thật` bắt buộc có số: mất bao lâu (bấm giờ mấy lần), mấy lần/tuần, bao nhiêu người gặp, log/ticket/quote nào.
 
+> Ghi chú trung thực: các con số dưới đây là **ước tính tự báo cáo** từ trải nghiệm 2-4 tuần gần nhất, chưa bấm giờ có hệ thống. Các dòng được chọn vào top 3 sẽ cần bấm giờ lại ít nhất 3 lần trước khi dùng làm baseline.
+
 | # | Lăng kính (Lặp lại / Tốn thời gian / AI có thể tốt hơn / Pain từ người khác) | Problem quan sát được | Ai chịu ảnh hưởng? | Dấu hiệu thật (số + bằng chứng) |
 |---|---|---|---|---|
-| 1 | Lặp lại / Tốn thời gian | Setup môi trường. Mỗi lần chuyển project đều phải check version, library,.. | AI enginer | Khi chuyển một dự án thì sẽ tạo một env khác nhau nhằm tránh xung đột, nhưng khi không kiểm soát kỹ trong env thì sẽ phải setting lại library, thậm chí phải xóa môi trường và setup lại env |
-| 2 |Lặp lại / Tốn thời gian | Fix bug. Khi build một project, việc dính bug là điều hết sức bình thường, nhưng khi fix thường mất rất nhiều thời gian, nguyên nhân có thể do code, do phần cứng, do thư viện, ... | AI Enginer, Đồng nghiệp, Tôi | Khi thực hiện trên Jetson, cần phải tìm nguyên nhân vì sao DLA chạy chậm hơn GPU ?. Với các project bình thường phải tìm hiểu vì sao bug ? Do torch, hay code ??? |
-| 3 | Tốn thời gian | Di chuyển nhiều. Có nhiều lúc khiến tôi phải di chuyển quá nhiều | Tôi, Đồng nghiệp | Một ngày có thể di chuyển 40-60km, thời gian di chuyển đến 2h |
-| 4 | Tốn thời gian | Tôi thường dành khá nhiều thời gian trong buổi tối để chs game | Tôi | Tầm 2-4h mỗi ngày |
-| 5 | AI có thể tốt hơn/ Tốn thời gian/Lặp lại | Build từ đầu một sản phẩm, nhưng phải ngồi kiểm soát AI, thiết kế kiến trúc cho AI làm, kiểm chứng code | Tôi, Đồng nghiệp | Các dự án mới, các Project mới |
-
+| 1 | Lặp lại / Tốn thời gian | Setup môi trường: mỗi lần chuyển project phải check lại version Python, CUDA, PyTorch, library; env không kiểm soát kỹ thì phải cài lại library hoặc xóa env làm lại. | Tôi, AI Engineer trong team | Khoảng 1-2 lần/tuần; một lần setup suôn sẻ ~20-30 phút, lần bị conflict ~45-120 phút. Tháng gần nhất phải xóa và tạo lại env khoảng 3 lần. |
+| 2 | Lặp lại / Tốn thời gian | Fix bug khi build/deploy project AI: khó biết lỗi do code, torch, CUDA/driver hay phần cứng. | Tôi, AI Engineer, đồng nghiệp | Ví dụ thật: tìm nguyên nhân vì sao model chạy trên DLA của Jetson chậm hơn GPU mất ~2 buổi làm việc. Lỗi thường mất 30-180 phút/lỗi, khoảng 2-3 lỗi khó/tuần. |
+| 3 | Tốn thời gian | Di chuyển nhiều giữa nhà, trường và nơi làm việc. | Tôi, đồng nghiệp | 40-60 km/ngày, ~2 giờ di chuyển/ngày, khoảng 4-5 ngày/tuần. (Pain thật nhưng không phải bài toán AI — giữ để đối chứng.) |
+| 4 | Tốn thời gian | Dành nhiều thời gian buổi tối để chơi game, làm giảm thời gian tự học. | Tôi | 2-4 giờ/ngày. (Vấn đề thói quen cá nhân, giải bằng process fix, không phải AI.) |
+| 5 | AI có thể tốt hơn / Tốn thời gian / Lặp lại | Build sản phẩm mới bằng AI coding assistant nhưng phải tự thiết kế kiến trúc, giám sát và kiểm chứng code AI sinh ra. | Tôi, đồng nghiệp dùng AI coding | Mỗi feature ~60-180 phút, trong đó review + test + sửa assumption sai chiếm ~50%; thường cần 3-5 vòng prompt → sửa trước khi chạy đúng. |
+| 6 | Lặp lại / Tốn thời gian | Convert model sang ONNX/TensorRT cho Jetson: thử nhiều tổ hợp opset, precision (FP16/INT8), batch size rồi benchmark lại bằng tay. | Tôi, AI Engineer làm deploy | Mỗi model ~1-3 giờ, thường phải thử 3-6 cấu hình; kết quả benchmark ghi rời rạc trong terminal/notes. |
+| 7 | Tốn thời gian / AI có thể tốt hơn | So sánh kết quả nhiều lần train: mở log/TensorBoard từng run, copy mAP/loss sang bảng để chọn checkpoint. | Tôi, team AI | ~30-45 phút mỗi lần so sánh, 2-3 lần/tuần; từng chọn nhầm checkpoint 1 lần vì copy sai cột. (Có thể giải bằng script/MLflow trước khi nghĩ đến AI.) |
+| 8 | Pain từ người khác | Đồng nghiệp/thành viên mới hỏi lại cách chạy project vì README không cập nhật theo code. | Đồng nghiệp, thành viên mới, tôi (người trả lời) | Khoảng 3-5 câu hỏi/tuần dạng "chạy file nào", "cần version gì"; mỗi lần mất 10-20 phút giải thích hoặc ngồi setup cùng. |
+| 9 | Pain từ người khác / Tốn thời gian | Kiểm tra annotation (bounding box, ID tracking) của dataset do người khác gán nhãn trước khi train. | Tôi, người gán nhãn, team AI | Dataset vài nghìn frame, kiểm tra thủ công mất vài giờ mỗi đợt; lỗi annotation phát hiện muộn làm phải train lại. (Trùng hướng với candidate #5, #6 của nhóm.) |
+| 10 | Tốn thời gian / AI có thể tốt hơn | Đọc paper/repo mới để tìm kiến trúc hoặc kỹ thuật phù hợp cho bài toán đang làm. | Tôi | ~3-5 giờ/tuần; nhiều paper đọc xong mới biết không phù hợp phần cứng edge (Jetson) hoặc không có code. |
 
 > Gợi ý tự soi: tuần trước mất nhiều thời gian nhất vào việc gì? Việc gì hay trì hoãn? Người khác hay hỏi lại câu gì? Workflow nào ai cũng biết là chậm?
 
 **AI đã dùng ở Phase 1 (nếu có):**
-- Prompt đã hỏi:
-- Ý dùng được:
-- Ý bỏ vì không phải pain thật:
+- Prompt đã hỏi: "Đây là danh sách việc tôi làm hằng tuần với vai trò AI Engineer Intern. Hãy chỉ ra problem nào quá chung chung, problem nào không phải pain thật, và tôi cần đo gì để có dấu hiệu thật cho từng problem."
+- Ý dùng được: AI chỉ ra bài "fix bug" và "build bằng AI" còn quá rộng, gợi ý thu hẹp vào một bước cụ thể (xác định root cause, review/kiểm chứng code); gợi ý thêm lăng kính "pain từ người khác" (câu hỏi lặp lại của đồng nghiệp, chất lượng annotation); nhắc phải ghi số đo (phút/lần, lần/tuần) thay vì "mất nhiều thời gian".
+- Ý bỏ vì không phải pain thật: AI gợi ý "viết email/báo cáo tuần" và "lên lịch họp" nhưng tôi gần như không làm việc này nên bỏ. Problem #3 (di chuyển) và #4 (chơi game) giữ lại để đối chứng nhưng ghi rõ không phải bài toán AI.
 
 **Self-check Phase 1:**
-- [ ] Đủ 5+ dòng, mỗi dòng có actor + số đo cụ thể
-- [ ] Dùng ít nhất 3/4 lăng kính
-- [ ] Không có dòng chung chung kiểu "mất nhiều thời gian"
+- [x] Đủ 5+ dòng, mỗi dòng có actor + số đo cụ thể (10 dòng)
+- [x] Dùng ít nhất 3/4 lăng kính (dùng đủ 4/4: Lặp lại, Tốn thời gian, AI có thể tốt hơn, Pain từ người khác)
+- [x] Không có dòng chung chung kiểu "mất nhiều thời gian"
 
 ---
 
@@ -145,6 +156,7 @@ Engineer review trước khi execute.
 #### Problem Card #2 — [Xác định root cause khi project AI gặp lỗi]
 
 ```text
+Problem 1 câu:
 Khi project AI gặp lỗi, tôi mất nhiều thời gian để xác định lỗi đến từ code, library, CUDA/driver, phần cứng hay cấu hình hệ thống.
 
 Actor:
@@ -318,9 +330,9 @@ Fallback:
 Nếu AI reviewer và coding agent cùng cho kết quả sai,
 CI/test vẫn là gate bắt buộc.
 Không tự động merge khi test fail hoặc confidence thấp.
+```
 
 ---
-```
 
 ### 2.3. Card muốn pitch nhất (chuẩn bị 2 phút)
 
@@ -333,22 +345,38 @@ Problem Card #3: Review và kiểm chứng code do AI sinh ra
 
 **Vì sao (2-3 câu: workflow gì, số đo gì, impact gì):**
 
+```text
+Workflow: viết requirement → thiết kế kiến trúc → prompt AI sinh code → review → chạy test/build/inference → sửa prompt/code, lặp nhiều vòng. Khi build model từ đầu, prompt phải chứa kiến trúc model và những gì mình đã nghiên cứu để AI có baseline tốt.
+Số đo (ước tính, cần đo trên 3 feature): mỗi feature ~60-180 phút, trong đó bước review + test + tìm assumption sai chiếm ~50%, thường 3-5 vòng sửa.
+Impact: bottleneck không nằm ở tốc độ AI sinh code mà ở việc con người kiểm chứng code có đúng requirement, kiến trúc và môi trường thật (tensor shape, device, version library) hay không; code "chạy được" nhưng sai logic có thể lọt vào project.
 ```
-Workflow rất rõ. Khi mà build một model từ đầu, điều cần thiết nhất là phải tạo một prompt để có một baseline tốt nhất. Vậy trong prompt sẽ có gì ? Nó sẽ chứa thông tin kiến trúc model của mình, những thứ mà mình đã nghiên cứu,...
 
+**Pitch 2 phút (bản nói):**
+
+```text
+Tôi là AI Engineer Intern, thường dùng AI coding assistant để build feature/model mới.
+AI viết code rất nhanh, nhưng tôi vẫn mất khoảng một nửa thời gian của mỗi feature để đọc, chạy test và tìm các assumption sai mà AI tự đặt ra.
+Điểm nghẽn nằm ở một bước: kiểm chứng code AI sinh ra trước khi tích hợp.
+Nếu giảm được ≥40% thời gian review và giữ quy tắc "không merge khi critical test fail", tôi có nhiều thời gian hơn cho thiết kế kiến trúc.
+Câu hỏi tôi chưa chắc: bài này có thật sự cần AI reviewer, hay chỉ cần test + CI + chia task nhỏ hơn là đủ?
 ```
 
 **Câu hỏi tôi muốn nhóm challenge (1-2 câu hỏi đúng chỗ yếu):**
 
-``` -Kiến trúc tôi thiết kế đã thực sự đúng chưa? Hiệu quả không ?
-    -Model được build có chạy ổn không ? Có vấn đề gì tiềm ẩn không ?
+```text
+- Nếu đã có unit test, CI và linter, phần nào của việc review còn lại thật sự cần AI? Hay đây chỉ là process fix (chia task nhỏ, viết acceptance criteria trước)?
+- Kiến trúc tôi thiết kế cho AI làm đã đúng và hiệu quả chưa, và làm sao có ground truth để đo "AI reviewer bắt đúng lỗi" khi mỗi feature/project lại khác nhau?
 ```
 
 **AI phản biện Card (nếu có):**
-- Điểm yếu AI chỉ ra: Việc build từ đầu quá nhiều rủi ro, nếu mình không kiểm soát kỹ thì khả năng fail là khá cao.
-- Tôi sửa gì: Khi AI chạy xong từng lệnh thì tôi sẽ có nhiệm vụ check code, check thuật toán trước khi để AI chạy lệnh tiếp theo
+- Điểm yếu AI chỉ ra: Problem ban đầu ("build sản phẩm từ đầu bằng AI") quá rộng và đang solution-first; nếu không kiểm soát kỹ từng bước thì khả năng fail khá cao. Ngoài ra chưa có số đo thật và chưa so sánh với phương án không dùng AI (CI, test, linter).
+- Tôi sửa gì: Thu hẹp card về đúng một bottleneck là "review và kiểm chứng code AI sinh ra"; bổ sung non-AI alternative và đặt CI/test làm gate bắt buộc; áp dụng nguyên tắc khi AI chạy xong từng bước thì tôi check code, check thuật toán trước khi để AI chạy bước tiếp theo.
+
+**Kết quả sau khi nhóm challenge:**
+- Nhóm nhận xét card #3 mạnh nhưng scope còn rộng, khó tạo pilot có ground truth trong thời gian lab; card #2 (root cause) tiềm năng nhưng cần thu hẹp vào Jetson/CUDA/TensorRT.
+- Tôi đồng ý chuyển sang candidate #6 (phát hiện ID switch) của nhóm vì actor, workflow và bottleneck cụ thể hơn và nhóm có dữ liệu tracking để thử. Chi tiết ở `02-group-problem-statement/group-report.md`.
 
 ### Self-check nộp phần 01
-- [ ] Có 5+ problems + top 3 Cards đủ field
-- [ ] Mỗi Card có workflow trước/sau + bottleneck + metric + fallback
-- [ ] Đã chọn 1 card pitch + câu hỏi challenge
+- [x] Có 5+ problems (10 problems) + top 3 Cards đủ field
+- [x] Mỗi Card có workflow trước/sau + bottleneck + metric + fallback
+- [x] Đã chọn 1 card pitch + câu hỏi challenge
